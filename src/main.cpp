@@ -1,5 +1,10 @@
-#include <iostream>
+#include "scene/sceneManager.h"
+#include "game/mainScene.h"
 
 int main(int, char**) {
-    std::cout << "Hello, world!\n";
+    MainScene scene;
+
+    SceneManager sManager;
+    sManager.addScene(scene);
+    sManager.startRender();
 }
