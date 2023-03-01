@@ -1,10 +1,13 @@
 #include "scene/sceneManager.h"
-#include "game/mainScene.h"
+#include "game/gameScene.h"
 
 int main(int, char**) {
-    MainScene scene;
+    std::cout << "Creating scenes" << std::endl;
+    GameScene game;
 
     SceneManager sManager;
-    sManager.addScene(scene);
+    sManager.addScene(game);
+
+    std::cout << "Starting renderer" << std::endl;
     sManager.startRender();
 }

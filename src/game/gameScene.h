@@ -1,13 +1,19 @@
 #include "../scene/scene.h"
+#include "../tiles/tiles.h"
 
 #pragma once
-#ifndef MAINSCENE_H_
-#define MAINSCENE_H_
+#ifndef GAMESCENE_H_
+#define GAMESCENE_H_
 
-class MainScene : public Scene {
+class GameScene : public Scene {
     public:
+        GameScene();
+
         void setup() override;
         void draw(sf::RenderWindow& window, float deltaTime) override;
+
+    private:
+        Tiles* tileSheet;
 };
 
 #endif

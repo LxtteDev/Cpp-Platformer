@@ -15,6 +15,9 @@ void SceneManager::switchScene(int id) {
     this->gameWindow.clear();
 
     this->currentScene = scenes[id];
+    this->currentScene->setup();
+
+    std::cout << "Switched" << std::endl;
 }
 
 void SceneManager::startRender() {
