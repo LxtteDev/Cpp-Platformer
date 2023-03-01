@@ -13,9 +13,12 @@ FetchContent_MakeAvailable(SFML)
 include(CTest)
 enable_testing()
 
-add_executable(Platformer
-    src/main.cpp
+file(GLOB source
+    "src/**/*.h"
+    "src/**/*.cpp"
 )
+
+add_executable(Platformer src/main.cpp ${source})
 
 target_link_libraries(Platformer sfml-graphics)
 
