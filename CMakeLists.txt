@@ -19,6 +19,7 @@ file(GLOB source
 )
 
 add_executable(Platformer src/main.cpp ${source})
+file(COPY ${CMAKE_SOURCE_DIR}/content DESTINATION ${CMAKE_BINARY_DIR}/Debug)
 
 target_link_libraries(Platformer sfml-graphics)
 
