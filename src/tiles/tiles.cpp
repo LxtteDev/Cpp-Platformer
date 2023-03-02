@@ -33,7 +33,6 @@ sf::Sprite& Tiles::getSprite(int id) {
 }
 
 sf::Sprite& Tiles::generateMap(int X, int Y, std::vector<std::vector<int>> level) {
-    std::cout << this->tileSize << std::endl;
     std::cout << "Tiles: Creating tile map (" << X * this->tileSize << ", " << Y * this->tileSize << ")" << std::endl;
 
     sf::RenderTexture* texture = new sf::RenderTexture();
@@ -42,7 +41,9 @@ sf::Sprite& Tiles::generateMap(int X, int Y, std::vector<std::vector<int>> level
 
     for (int y = 0; y < Y; y++) {
         for (int x = 0; x < X; x++) {
-            int id = level[y][x];
+            int id = level[x][y];
+            if (id == -1) continue;
+            std::cout << id << std::endl;
 
             sf::Sprite& tileSprite = this->getSprite(id);
             tileSprite.setPosition(sf::Vector2f(x * this->tileSize, y * this->tileSize));
