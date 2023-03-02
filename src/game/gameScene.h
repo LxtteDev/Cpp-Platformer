@@ -10,9 +10,14 @@ class GameScene : public Scene {
         GameScene();
 
         void setup() override;
+        void resize(sf::Vector2u newSize) override;
         void draw(sf::RenderWindow& window, float deltaTime) override;
 
     private:
+        float resizer = 1.0f;
+        const int X = 10;
+        const int Y = 5;
+
         Tiles* tileSheet;
         std::vector<sf::Sprite> sprites;
 

@@ -43,7 +43,6 @@ sf::Sprite& Tiles::generateMap(int X, int Y, std::vector<std::vector<int>> level
         for (int x = 0; x < X; x++) {
             int id = level[x][y];
             if (id == -1) continue;
-            std::cout << id << std::endl;
 
             sf::Sprite& tileSprite = this->getSprite(id);
             tileSprite.setPosition(sf::Vector2f(x * this->tileSize, y * this->tileSize));

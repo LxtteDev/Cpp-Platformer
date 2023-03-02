@@ -16,6 +16,7 @@ void SceneManager::switchScene(int id) {
 
     this->currentScene = scenes[id];
     this->currentScene->setup();
+    this->currentScene->resize(this->gameWindow.getSize());
 
     std::cout << "SceneManager: Switched" << std::endl;
 }
@@ -34,6 +35,7 @@ void SceneManager::startRender() {
                 open = 0;
             else if (e.type == sf::Event::Resized) {
                 this->gameWindow.setView(sf::View(sf::FloatRect(0, 0, e.size.width, e.size.height)));
+                this->currentScene->resize(this->gameWindow.getSize());
             }
 
         // std::cout << "Drawing scene" << std::endl;
