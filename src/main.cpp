@@ -2,12 +2,12 @@
 #include "game/gameScene.h"
 
 int main(int, char**) {
-    std::cout << "Creating scenes" << std::endl;
+    std::cout << "Main: Creating scenes" << std::endl;
     GameScene game;
 
     SceneManager sManager;
     sManager.addScene(game);
 
-    std::cout << "Starting renderer" << std::endl;
+    std::cout << "Main: Starting renderer" << std::endl;
     sManager.startRender();
 }

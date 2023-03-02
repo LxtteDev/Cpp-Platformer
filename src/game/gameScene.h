@@ -14,6 +14,10 @@ class GameScene : public Scene {
 
     private:
         Tiles* tileSheet;
+        std::vector<sf::Sprite> sprites;
+
+        std::vector<std::vector<int>> level;
+        sf::Sprite levelMap;
 };
 
 #endif

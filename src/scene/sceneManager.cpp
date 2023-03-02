@@ -3,7 +3,7 @@
 SceneManager::SceneManager(): gameWindow(sf::VideoMode(800, 600), "Platformer") {}
 
 int SceneManager::addScene(Scene& scene) {
-    std::cout << "Adding scene" << std::endl;
+    std::cout << "SceneManager: Adding scene" << std::endl;
     scenes.push_back(&scene);
 
     if (scenes.size() == 1) SceneManager::switchScene(0);
@@ -11,13 +11,13 @@ int SceneManager::addScene(Scene& scene) {
 }
 
 void SceneManager::switchScene(int id) {
-    std::cout << "Switching scene" << std::endl;
+    std::cout << "SceneManager: Switching scene" << std::endl;
     this->gameWindow.clear();
 
     this->currentScene = scenes[id];
     this->currentScene->setup();
 
-    std::cout << "Switched" << std::endl;
+    std::cout << "SceneManager: Switched" << std::endl;
 }
 
 void SceneManager::startRender() {
@@ -33,7 +33,7 @@ void SceneManager::startRender() {
 			if (e.type == sf::Event::Closed)
                 open = 0;
             else if (e.type == sf::Event::Resized) {
-                // this->gameWindow.setView(sf::View(sf::FloatRect(0, 0, e.size.width, e.size.height)));
+                this->gameWindow.setView(sf::View(sf::FloatRect(0, 0, e.size.width, e.size.height)));
             }
 
         // std::cout << "Drawing scene" << std::endl;
