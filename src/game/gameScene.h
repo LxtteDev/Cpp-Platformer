@@ -1,5 +1,6 @@
 #include "../scene/scene.h"
 #include "../tiles/tiles.h"
+#include "../physics/collider.h"
 
 #pragma once
 #ifndef GAMESCENE_H_
@@ -19,9 +20,14 @@ class GameScene : public Scene {
         const int Y = 5;
 
         Tiles* tileSheet;
-        std::vector<sf::Sprite> sprites;
+        Collider* tileCollider;
 
+        std::vector<sf::Sprite> sprites;
         std::vector<std::vector<int>> level;
+
+        sf::VertexArray* points;
+        sf::VertexArray pointScaled;
+
         sf::Sprite levelMap;
 };
 
