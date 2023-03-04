@@ -69,3 +69,17 @@ Collider::Collider(sf::Sprite& sprite): mSprite(&sprite) {
 sf::VertexArray& Collider::getList() {
     return this->points;
 }
+
+bool Collider::checkCollision(sf::Vector2f point, float scaleFactor) {
+    for (int i = 0; i < this->points.getVertexCount(); i++) {
+        if (i % 2 == 1) continue;
+
+        sf::Vector2f positionA = this->points[i].position * scaleFactor;
+        sf::Vector2f positionB = this->points[i + 1].position * scaleFactor;
+
+        if (point.x < positionA.x || point.x > positionB.x) continue; // If outside X range
+        if (positionA.y - threshold <= point.y && positionA.y + threshold <= point.y) return true; // If touching line
+    }
+
+    return false;
+}

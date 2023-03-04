@@ -1,6 +1,7 @@
 #include "../scene/scene.h"
 #include "../tiles/tiles.h"
 #include "../physics/collider.h"
+#include "../physics/rigidbody.h"
 
 #pragma once
 #ifndef GAMESCENE_H_
@@ -15,20 +16,24 @@ class GameScene : public Scene {
         void draw(sf::RenderWindow& window, float deltaTime) override;
 
     private:
+        float scale = 1.0f;
         float resizer = 1.0f;
         const int X = 10;
         const int Y = 5;
 
         Tiles* tileSheet;
         Collider* tileCollider;
+        Rigidbody* player;
 
         std::vector<sf::Sprite> sprites;
         std::vector<std::vector<int>> level;
+        std::vector<Collider*> colliders;
 
         sf::VertexArray* points;
         sf::VertexArray pointScaled;
 
         sf::Sprite levelMap;
+        sf::Sprite playerSprite;
 };
 
 #endif
