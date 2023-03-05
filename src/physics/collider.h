@@ -12,7 +12,7 @@ class Collider {
         Collider(sf::Sprite& sprite);
 
         sf::VertexArray& getList();
-        bool checkCollision(sf::Vector2f point, float scaleFactor);
+        sf::Vector2f checkCollision(sf::Vector2f a, sf::Vector2f b, float scaleFactor);
 
     private:
         sf::Sprite* mSprite;

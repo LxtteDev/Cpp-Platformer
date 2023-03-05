@@ -10,8 +10,8 @@ GameScene::GameScene(): tileSheet(new Tiles("content/sprites/game-tiles-01.png",
                         // -1, 22, 23, 23, 24, -1, 22, 23, 24, -1,
                         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                        -1, -1,  0,  1,  1,  1,  2, -1, -1, -1,
-                         1,  1, 13,  8,  8,  8, 27,  1,  1,  1 }; 
+                        -1, -1, -1, -1, -1, -1,  0,  1,  1,  2,
+                         1,  1,  1,  1,  1,  1, 13,  8,  8, 27 }; 
 
     for (int y = 0; y < int(this->Y); y++)
         for (int x = 0; x < int(this->X); x++)
@@ -24,7 +24,7 @@ GameScene::GameScene(): tileSheet(new Tiles("content/sprites/game-tiles-01.png",
     playerTexture->loadFromFile("content/sprites/white-character.png");
 
     this->playerSprite = sf::Sprite(*playerTexture);
-    this->playerSprite.setPosition(sf::Vector2f(350.0f, 0.0f));
+    this->playerSprite.setPosition(sf::Vector2f(300.0f, 0.0f));
 
     this->player = new Rigidbody(this->playerSprite);
 }
