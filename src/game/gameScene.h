@@ -1,7 +1,7 @@
 #include "../scene/scene.h"
 #include "../tiles/tiles.h"
 #include "../physics/collider.h"
-#include "../physics/rigidbody.h"
+#include "../entity/entity.h"
 
 #pragma once
 #ifndef GAMESCENE_H_
@@ -12,7 +12,7 @@ class GameScene : public Scene {
         GameScene();
 
         void setup() override;
-        void resize(sf::Vector2u newSize) override;
+        void resize(sf::Vector2u prevSize, sf::Vector2u newSize) override;
         void draw(sf::RenderWindow& window, float deltaTime) override;
 
     private:
@@ -23,7 +23,7 @@ class GameScene : public Scene {
 
         Tiles* tileSheet;
         Collider* tileCollider;
-        Rigidbody* player;
+        Entity* player;
 
         std::vector<sf::Sprite> sprites;
         std::vector<std::vector<int>> level;

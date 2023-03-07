@@ -11,7 +11,7 @@ class Scene {
         Scene();
 
         virtual void setup();
-        virtual void resize(sf::Vector2u newSize);
+        virtual void resize(sf::Vector2u prevSize, sf::Vector2u newSize);
         virtual void draw(sf::RenderWindow& window, float deltaTime);
 };
 

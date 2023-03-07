@@ -19,38 +19,45 @@ GameScene::GameScene(): tileSheet(new Tiles("content/sprites/game-tiles-01.png",
 
     this->resizer = 1 / float( this->Y * 16 );
 
-    // Spawn player
+    // Create player
     sf::Texture* playerTexture = new sf::Texture();
     playerTexture->loadFromFile("content/sprites/white-character.png");
 
     this->playerSprite = sf::Sprite(*playerTexture);
     this->playerSprite.setPosition(sf::Vector2f(300.0f, 0.0f));
 
-    this->player = new Rigidbody(this->playerSprite);
+    this->player = new Entity(this->playerSprite);
+
 }
 
 void GameScene::setup() {
     std::cout << "GameScene: Setup" << std::endl;
 
+    // Create map
     this->levelMap = tileSheet->generateMap(10, 5, this->level);
-
     this->tileCollider = new Collider(this->levelMap);
-    points = &(tileCollider->getList()); // Debug
-    this->pointScaled = *points; // Debug
+    points = &(tileCollider->getList());
 
-    this->levelMap.setScale(sf::Vector2f(3.0f, 3.0f));
-
+    // Add to list of colliders
     this->colliders.push_back(tileCollider);
-
 
     return;
 }
 
-void GameScene::resize(sf::Vector2u newSize) {
+void GameScene::resize(sf::Vector2u prevSize, sf::Vector2u newSize) {
     scale = newSize.y * this->resizer;
+    sf::Vector2f scaler = sf::Vector2f((float)prevSize.x / (float)newSize.x, (float)prevSize.y / (float)newSize.y);
+
+    std::cout << "Prev:  " << prevSize.x << ", " << prevSize.y << std::endl;
+    std::cout << "New:   " << newSize.x << ", " << newSize.y << std::endl;
+    std::cout << "Scale: " << scaler.x << ", " << scaler.y << std::endl;
 
     this->levelMap.setScale(sf::Vector2f(scale, scale));
+    this->levelMap.setPosition(sf::Vector2f(this->levelMap.getPosition().x * scaler.x, this->levelMap.getPosition().x * scaler.y));
+
     this->playerSprite.setScale(sf::Vector2f(scale, scale));
+    // this->playerSprite.setPosition(sf::Vector2f(this->playerSprite.getPosition().x * scaler.x, this->playerSprite.getPosition().x * scaler.y));
+    player->rigidbody->position = sf::Vector2f(this->playerSprite.getPosition().x * scaler.x, this->playerSprite.getPosition().y * scaler.y);
 
     for (int i = 0; i < this->pointScaled.getVertexCount(); i++) { // Debug
         this->pointScaled[i].position = (*points)[i].position * scale;
@@ -58,6 +65,7 @@ void GameScene::resize(sf::Vector2u newSize) {
 }
 
 void GameScene::draw(sf::RenderWindow& window, float deltaTime) {
+    // std::cout << "GameScene: Draw" << std::endl;
     window.clear(sf::Color(49, 198, 247));
 
     player->update(deltaTime, this->colliders, scale);

@@ -11,12 +11,12 @@ class Rigidbody {
 
         void update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor);
 
-    private:
-        sf::Sprite* mSprite;
-
         sf::Vector2f position;
         sf::Vector2f velocity;
         sf::Vector2f acceleration;
+
+    private:
+        sf::Sprite* mSprite;
 };
 
 #endif
