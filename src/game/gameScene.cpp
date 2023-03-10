@@ -26,7 +26,7 @@ GameScene::GameScene(): tileSheet(new Tiles("content/sprites/game-tiles-01.png",
     this->playerSprite = sf::Sprite(*playerTexture);
     this->playerSprite.setPosition(sf::Vector2f(300.0f, 0.0f));
 
-    this->player = new Entity(this->playerSprite);
+    this->player = new Player(this->playerSprite);
 
 }
 
@@ -57,7 +57,7 @@ void GameScene::resize(sf::Vector2u prevSize, sf::Vector2u newSize) {
 
     this->playerSprite.setScale(sf::Vector2f(scale, scale));
     // this->playerSprite.setPosition(sf::Vector2f(this->playerSprite.getPosition().x * scaler.x, this->playerSprite.getPosition().x * scaler.y));
-    player->rigidbody->position = sf::Vector2f(this->playerSprite.getPosition().x * scaler.x, this->playerSprite.getPosition().y * scaler.y);
+    player->rigidbody->position = sf::Vector2f(this->playerSprite.getPosition().x, this->playerSprite.getPosition().y * scaler.y);
 
     for (int i = 0; i < this->pointScaled.getVertexCount(); i++) { // Debug
         this->pointScaled[i].position = (*points)[i].position * scale;

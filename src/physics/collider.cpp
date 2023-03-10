@@ -75,24 +75,18 @@ sf::VertexArray& Collider::getList() {
 }
 
 sf::Vector2f Collider::checkCollision(sf::Vector2f a, sf::Vector2f b, float scaleFactor) {
-    // a = roundVector(a);
-    // b = roundVector(b);
 
     for (int i = 0; i < this->points.getVertexCount(); i++) {
         if (i % 2 == 1) continue;
 
         sf::Vector2f positionA = this->points[i].position * scaleFactor;
         sf::Vector2f positionB = this->points[i + 1].position * scaleFactor;
-
-        // positionA = roundVector(positionA);
-        // positionB = roundVector(positionB);
-
         if (a.y == b.y) { // Horizontal line
             if ((a.x > positionA.x && a.x < positionB.x) || (b.x > positionA.x && b.x < positionB.x) || // X Range
                 (positionA.x > a.x && positionA.x < b.x) || (positionB.x > a.x && positionB.x < b.x))
-
-                if ((a.y < positionA.y + threshold && a.y > positionA.y - threshold) || // Y Range
-                    (a.y + threshold > positionA.y && a.y - threshold < positionA.y)) return sf::Vector2f(i, positionA.y);
+                    if ((a.y < positionA.y + threshold && a.y > positionA.y - threshold) || // Y Range
+                        (a.y + threshold > positionA.y && a.y - threshold < positionA.y))
+                            return sf::Vector2f(i, positionA.y);
 
         } else if (a.x == b.x) { // Vertical line
         }

@@ -8,12 +8,11 @@ class Entity {
     public:
         Entity(sf::Sprite& sprite);
 
-        void update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor);
+        virtual void update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor);
 
         Rigidbody* rigidbody;
 
-        private:
-
+    private:
         sf::Sprite& mSprite;
 };
 

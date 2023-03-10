@@ -26,21 +26,21 @@ void Rigidbody::update(float deltaTime, std::vector<Collider*> colliders, float 
         float drag = this->velocity.x / (this->mass * dragCoefficient);
         this->velocity -= sf::Vector2f(drag, 0.0f);
     }
-    // if (this->acceleration.y == 0.0f)
-    //     this->velocity -= sf::Vector2f(0.0f, drag) * deltaTime;
 
     this->velocity += (this->acceleration + sf::Vector2f(0, gravity)) * deltaTime;
     this->position += this->velocity * deltaTime;
 
+    this->colliding = false;
     for (Collider* collider: colliders) {
         // std::cout << "Rigidbody: Iterate" << std::endl;
         sf::Vector2f collidesBottom = collider->checkCollision(bottomLeft, bottomRight, scaleFactor);
 
         if (collidesBottom.x != -1) {
-            this->acceleration = sf::Vector2f(this->acceleration.x, 0.0f);
-            this->velocity = sf::Vector2f(this->velocity.x, 0.0f);
+            this->acceleration = sf::Vector2f(this->acceleration.x, std::min(this->acceleration.y, 0.0f));
+            this->velocity = sf::Vector2f(this->velocity.x, std::min(this->velocity.y, 0.0f));
             this->position = sf::Vector2f(this->position.x, collidesBottom.y - bounds.height * scaleFactor);
 
+            this->colliding = true;
             break;
         }
     }

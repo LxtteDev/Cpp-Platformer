@@ -14,6 +14,7 @@ class Rigidbody {
 
         void update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor);
 
+        bool colliding;
         float mass;
 
         sf::Vector2f position;

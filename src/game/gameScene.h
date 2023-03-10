@@ -1,7 +1,7 @@
 #include "../scene/scene.h"
 #include "../tiles/tiles.h"
 #include "../physics/collider.h"
-#include "../entity/entity.h"
+#include "../entity/player.h"
 
 #pragma once
 #ifndef GAMESCENE_H_
