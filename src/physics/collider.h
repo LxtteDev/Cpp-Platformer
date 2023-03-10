@@ -1,11 +1,12 @@
 #include <SFML/Graphics.hpp>
 #include <iostream>
 #include <vector>
+#include <cmath>
 
 #ifndef COLLIDER_H_
 #define COLLIDER_H_
 
-const float threshold = 0.01f;
+const float threshold = 1.0f;
 
 class Collider {
     public:
