@@ -6,7 +6,7 @@
 #ifndef COLLIDER_H_
 #define COLLIDER_H_
 
-const float threshold = 1.0f;
+const float threshold = 1.0f; // Must be within this range to update (In pixels)
 
 class Collider {
     public:

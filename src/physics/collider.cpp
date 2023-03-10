@@ -92,7 +92,7 @@ sf::Vector2f Collider::checkCollision(sf::Vector2f a, sf::Vector2f b, float scal
                 (positionA.x > a.x && positionA.x < b.x) || (positionB.x > a.x && positionB.x < b.x))
 
                 if ((a.y < positionA.y + threshold && a.y > positionA.y - threshold) || // Y Range
-                    (a.y + threshold > positionA.y && a.y - threshold < positionA.y)) return sf::Vector2f(0, positionA.y);
+                    (a.y + threshold > positionA.y && a.y - threshold < positionA.y)) return sf::Vector2f(i, positionA.y);
 
         } else if (a.x == b.x) { // Vertical line
         }
