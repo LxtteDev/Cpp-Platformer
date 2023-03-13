@@ -89,6 +89,13 @@ sf::Vector2f Collider::checkCollision(sf::Vector2f a, sf::Vector2f b, float scal
                             return sf::Vector2f(i, positionA.y);
 
         } else if (a.x == b.x) { // Vertical line
+            if (a.x > positionA.x && a.x < positionB.x) // X Range
+                if ((positionA.y < a.y + threshold && positionA.y > b.y - threshold) ||
+                    (positionA.y < b.y + threshold && positionA.y > a.y - threshold)) // Y Range
+                    if (a.x - positionA.x < positionB.x - a.x)
+                        return sf::Vector2f(positionA.x, i);
+                    else
+                        return sf::Vector2f(positionB.x, i);
         }
     }
 

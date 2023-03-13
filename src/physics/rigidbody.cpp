@@ -18,6 +18,7 @@ void Rigidbody::update(float deltaTime, std::vector<Collider*> colliders, float 
 
     sf::FloatRect bounds = mSprite->getLocalBounds();
 
+    sf::Vector2f topRight = this->position + sf::Vector2f(bounds.width * scaleFactor, 0.0f);
     sf::Vector2f bottomLeft = this->position + sf::Vector2f(0.0f, bounds.height * scaleFactor);
     sf::Vector2f bottomRight = this->position + sf::Vector2f(bounds.width * scaleFactor, bounds.height * scaleFactor);
 
@@ -33,9 +34,22 @@ void Rigidbody::update(float deltaTime, std::vector<Collider*> colliders, float 
     this->colliding = false;
     for (Collider* collider: colliders) {
         // std::cout << "Rigidbody: Iterate" << std::endl;
+        sf::Vector2f collidesRight  = collider->checkCollision(topRight + sf::Vector2f(0.0f, 5.0f), bottomRight - sf::Vector2f(0.0f, 5.0f), scaleFactor);
         sf::Vector2f collidesBottom = collider->checkCollision(bottomLeft, bottomRight, scaleFactor);
 
-        if (collidesBottom.x != -1) {
+        float moveRight  = abs(bottomRight.x - collidesRight.x);
+        float moveBottom = abs(bottomRight.y - collidesBottom.y);
+
+        if (collidesRight.y != -1) { // && moveRight <= moveBottom) {
+            this->acceleration = sf::Vector2f(std::min(this->acceleration.x, 0.0f), this->acceleration.y);
+            this->velocity = sf::Vector2f(std::min(this->velocity.x, 0.0f), this->velocity.y);
+            this->position = sf::Vector2f(collidesRight.x - bounds.width * scaleFactor, this->position.y);
+
+            this->colliding = true;
+            break;
+        }
+
+        if (collidesBottom.x != -1) { // && moveBottom <= moveRight) {
             this->acceleration = sf::Vector2f(this->acceleration.x, std::min(this->acceleration.y, 0.0f));
             this->velocity = sf::Vector2f(this->velocity.x, std::min(this->velocity.y, 0.0f));
             this->position = sf::Vector2f(this->position.x, collidesBottom.y - bounds.height * scaleFactor);
