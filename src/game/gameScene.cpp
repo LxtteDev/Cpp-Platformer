@@ -46,26 +46,22 @@ void GameScene::setup() {
 
 void GameScene::resize(sf::Vector2u prevSize, sf::Vector2u newSize) {
     scale = newSize.y * this->resizer;
-    // sf::Vector2f scaler = sf::Vector2f((float)prevSize.x / (float)newSize.x, (float)prevSize.y / (float)newSize.y);
-    sf::Vector2f scaler = sf::Vector2f((float)newSize.x / (float)prevSize.x, (float)newSize.y / (float)prevSize.y);
+
+    // Resize map to get scaler
+    sf::FloatRect preScaled = this->levelMap.getGlobalBounds();
+    this->levelMap.setScale(sf::Vector2f(scale, scale));
+    sf::FloatRect post = this->levelMap.getGlobalBounds();
+    sf::Vector2f scaler = sf::Vector2f(post.width / preScaled.width, post.height / preScaled.height);
+    if (prevSize.x == newSize.x && prevSize.y == newSize.y) scaler = sf::Vector2f(1.0f, 1.0f);
 
     std::cout << "Prev:  " << prevSize.x << ", " << prevSize.y << std::endl;
     std::cout << "New:   " << newSize.x << ", " << newSize.y << std::endl;
     std::cout << "Scale: " << scaler.x << ", " << scaler.y << std::endl;
 
-    this->levelMap.setScale(sf::Vector2f(scale, scale));
     this->levelMap.setPosition(sf::Vector2f(this->levelMap.getPosition().x * scaler.x, this->levelMap.getPosition().x * scaler.y));
 
-    // this->playerSprite.setPosition(sf::Vector2f(this->playerSprite.getPosition().x * scaler.x, this->playerSprite.getPosition().x * scaler.y));
-    // player->rigidbody->position = sf::Vector2f(this->playerSprite.getPosition().x, this->playerSprite.getPosition().y * scaler.y);
-
     this->playerSprite.setScale(sf::Vector2f(scale, scale));
-    if (scaler.y != 1.0f)
-        player->rigidbody->position = sf::Vector2f(this->playerSprite.getPosition().x * scaler.x, this->playerSprite.getPosition().y * scaler.y);
-
-    for (int i = 0; i < this->pointScaled.getVertexCount(); i++) { // Debug
-        this->pointScaled[i].position = (*points)[i].position * scale;
-    }
+    this->player->rigidbody->position = sf::Vector2f(this->player->rigidbody->position.x * scaler.x, this->player->rigidbody->position.y * scaler.y);
 }
 
 void GameScene::draw(sf::RenderWindow& window, float deltaTime) {
