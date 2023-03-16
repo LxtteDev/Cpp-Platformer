@@ -7,10 +7,10 @@ GameScene::GameScene(): tileSheet(new Tiles("content/sprites/game-tiles-01.png",
     this->level.resize(this->X, std::vector<int>(Y, -1));   
 
     int level[5][10] = { -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                        // -1, 22, 23, 23, 24, -1, 22, 23, 24, -1,
+                        -1, 22, 23, 23, 24, -1, 22, 23, 24, -1,
+                        // -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
                         -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                        -1, -1, -1, -1, -1, -1, -1, -1, -1, -1,
-                        -1, -1, -1, -1, -1, -1,  0,  1,  1,  2,
+                        -1, -1, -1, -1, -1, -1,  0,  1, -1, -1,
                          1,  1,  1,  1,  1,  1, 13,  8,  8, 27 }; 
 
     for (int y = 0; y < int(this->Y); y++)
@@ -41,6 +41,8 @@ void GameScene::setup() {
     // Add to list of colliders
     this->colliders.push_back(tileCollider);
 
+    this->pointScaled.setPrimitiveType(sf::Lines);
+
     return;
 }
 
@@ -62,6 +64,13 @@ void GameScene::resize(sf::Vector2u prevSize, sf::Vector2u newSize) {
 
     this->playerSprite.setScale(sf::Vector2f(scale, scale));
     this->player->rigidbody->position = sf::Vector2f(this->player->rigidbody->position.x * scaler.x, this->player->rigidbody->position.y * scaler.y);
+
+    this->pointScaled.clear();
+
+    for (int x = 0; x < this->points->getVertexCount(); x++) {
+        sf::Vector2f position = (*points)[x].position * scale;
+        this->pointScaled.append(position);
+    }
 }
 
 void GameScene::draw(sf::RenderWindow& window, float deltaTime) {

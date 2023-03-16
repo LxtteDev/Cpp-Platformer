@@ -1,6 +1,6 @@
 #include "sceneManager.h"
 
-SceneManager::SceneManager(): gameWindow(sf::VideoMode(800, 600), "Platformer") {}
+SceneManager::SceneManager(): gameWindow(sf::VideoMode(1820, 600), "Platformer") {}
 
 int SceneManager::addScene(Scene& scene) {
     std::cout << "SceneManager: Adding scene" << std::endl;

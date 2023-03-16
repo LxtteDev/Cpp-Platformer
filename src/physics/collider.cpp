@@ -30,6 +30,10 @@ Collider::Collider(sf::Sprite& sprite): mSprite(&sprite) {
     }
 
     bool secondary = false;
+
+    sf::Vector2f prev(0.0f, 0.0f);
+    float prevY = 0.0f;
+
     for (unsigned int y = 0; y < textureSize.y; ++y) { // 72
         for (unsigned int x = 0; x < textureSize.x; ++x) { // 5
             bool current = isFull[x][y];
@@ -61,15 +65,40 @@ Collider::Collider(sf::Sprite& sprite): mSprite(&sprite) {
                     secondary = !secondary;
                 }
                 // Detect edge
-                else if ((left && right && !up && down) || // Top
-                         (left && right && up && !down) || // Bottom
+                else if (// (left && right && !up && down) || // Top
+                         // (left && right && up && !down) || // Bottom
                          (!left && right && up && down) || // Left
                          (left && !right && up && down))   // Right
                 {
+                    this->points.append(sf::Vertex(sf::Vector2f(x + (secondary ? 1 : 0), y), sf::Color::Blue));
+                    secondary = !secondary;
                 }
             }
         }
     }
+
+    sf::Vector2f previousA(0.0f, 0.0f);
+    sf::Vector2f previousB(0.0f, 0.0f);
+    sf::VertexArray bufferArray;
+
+    for (int i = 0; i < this->points.getVertexCount(); i++) {
+        if (i % 2 == 1) continue;
+
+        sf::Vector2f positionA = this->points[i].position;
+        sf::Vector2f positionB = this->points[i + 1].position;
+
+        if (positionA.y != positionB.y) continue; // Remove, !update
+        if (positionA.y - previousA.y > 5) { previousA = positionA; previousB = positionB; bufferArray.append(sf::Vertex(positionA)); bufferArray.append(sf::Vertex(positionB)); continue; }; // Add, update
+        if (previousA.x == positionA.x && previousB.x == positionB.x) { previousA = positionA; previousB = positionB; continue; }; // Remove, update
+
+        previousA = positionA;
+        previousB = positionB;
+        
+        bufferArray.append(sf::Vertex(positionA));
+        bufferArray.append(sf::Vertex(positionB));
+    }
+
+    this->points = bufferArray;
 }
 
 sf::VertexArray& Collider::getList() {
