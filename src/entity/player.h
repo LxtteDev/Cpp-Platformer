@@ -10,7 +10,7 @@ class Player : public Entity {
     public:
         Player(sf::Sprite& sprite);
 
-        void update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor) override;
+        // void update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor) override;
 
     private:
 };

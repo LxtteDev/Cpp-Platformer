@@ -1,5 +1,5 @@
 #include <SFML/Graphics.hpp>
-#include "../physics/rigidbody.h"
+#include "../physics/rigid.h"
 
 #ifndef ENTITY_H_
 #define ENTITY_H_
@@ -8,12 +8,12 @@ class Entity {
     public:
         Entity(sf::Sprite& sprite);
 
-        virtual void update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor);
+        // virtual void update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor);
 
-        Rigidbody* rigidbody;
+        // RigidBody* rigidbody;
 
     private:
-        sf::Sprite& mSprite;
+        // sf::Sprite& mSprite;
 };
 
 #endif

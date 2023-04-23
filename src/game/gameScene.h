@@ -1,6 +1,6 @@
 #include "../scene/scene.h"
 #include "../tiles/tiles.h"
-#include "../physics/collider.h"
+#include "../physics/collision.h"
 #include "../entity/player.h"
 
 #pragma once
@@ -21,7 +21,7 @@ class GameScene : public Scene {
         const int X = 10;
         const int Y = 5;
 
-        Tiles* tileSheet;
+        /* Tiles* tileSheet;
         Collider* tileCollider;
         Entity* player;
 
@@ -33,7 +33,15 @@ class GameScene : public Scene {
         sf::VertexArray pointScaled;
 
         sf::Sprite levelMap;
-        sf::Sprite playerSprite;
+        sf::Sprite playerSprite; */
+
+        // Collisions
+        Collision* group;
+
+        // Ground
+        Tiles* tileSheet;
+        std::vector<StaticBody*> groundColliders;
+        sf::Sprite groundSprite;
 };
 
 #endif

@@ -9,7 +9,7 @@
 
 Player::Player(sf::Sprite& sprite): Entity(sprite) {}; //: mSprite(sprite), rigidbody(new Rigidbody(sprite)) {};
 
-void Player::update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor) {
+/* void Player::update(float deltaTime, std::vector<Collider*> colliders, float scaleFactor) {
     // Horizontal
     if (keyPressed(a))
         rigidbody->acceleration = sf::Vector2f(-playerSpeed, rigidbody->acceleration.y);
@@ -25,4 +25,4 @@ void Player::update(float deltaTime, std::vector<Collider*> colliders, float sca
     }
 
     Entity::update(deltaTime, colliders, scaleFactor);
-}
+} */

@@ -66,6 +66,15 @@ void Rigidbody::update(float deltaTime, std::vector<Collider*> colliders, float 
             this->colliding = true;
             break;
         }
+
+        // if (collidesTop.x != -1) { // +Y
+        //     this->acceleration = sf::Vector2f(this->acceleration.x, std::max(this->acceleration.y, 0.0f));
+        //     this->velocity = sf::Vector2f(this->velocity.x, std::max(this->velocity.y, 0.0f));
+        //     this->position = sf::Vector2f(this->position.x, collidesTop.y);
+
+        //     this->colliding = true;
+        //     break;
+        // }
     }
 
     // std::cout << "Rigidbody: Setting position" << std::endl;
